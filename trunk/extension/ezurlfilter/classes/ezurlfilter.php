@@ -8,7 +8,7 @@
  * an extended attribute filter for the URL datatype
  *
  * @author Kristof Coomans <kristof.coomans@telenet.be>
- * @copyright Kristof Coomans 2006-2007
+ * @copyright Kristof Coomans 2006-2008
  * @version 1.0
  */
 class eZURLFilter
@@ -45,13 +45,14 @@ class eZURLFilter
         if ( !is_array( $params ) )
         {
             eZDebug::writeError( 'Unexpected value for params, expected: array', 'eZURLFilter::createSqlParts' );
-            return array( 'tables' => $sqlTables, 'joins'  => $sqlJoins );
+            return array( 'tables' => $sqlTables, 'joins'  => $sqlJoins, 'columns' => '' );
         }
 
         // first optional param element should be either 'or' or 'and'
-        if( ( strtolower( $params[0] ) == 'or' ) || ( strtolower( $params[0] ) == 'and' ) )
+        if( is_string( $params[0] ) )
         {
-            $matchAll = !( array_shift($params) === 'or' );
+            $mode = strtolower( array_shift( $params ) );
+            $matchAll = ( $mode !== 'or' );
         }
         else
         {
@@ -215,7 +216,7 @@ class eZURLFilter
             $sqlJoins .= ' (' . join( $matchAll ? ' AND ' : ' OR ', $sqlCondArray ).') AND ';
         }
 
-        return array( 'tables' => $sqlTables, 'joins'  => $sqlJoins );
+        return array( 'tables' => $sqlTables, 'joins'  => $sqlJoins, 'columns' => '' );
     }
 }
 
