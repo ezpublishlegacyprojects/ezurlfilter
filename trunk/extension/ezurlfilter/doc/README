@@ -21,7 +21,7 @@ like, not like
 {def $ezLinks=fetch( 'content','tree',
                      hash( 'parent_node_id', 2,
                           'extended_attribute_filter', hash( 'id', 'eZURLFilter',
-                                                             'params', array( 'link/location', '=', 'http://ez.no' ))))}
+                                                             'params', array( array( 'link/location', '=', 'http://ez.no' )))))}
 
 
 
