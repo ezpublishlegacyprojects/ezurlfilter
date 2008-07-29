@@ -9,7 +9,7 @@
  *
  * @author Kristof Coomans <kristof.coomans@telenet.be>
  * @copyright Kristof Coomans 2006-2008
- * @version 1.0
+ * @version 2.0
  */
 class eZURLFilter
 {
@@ -33,8 +33,7 @@ class eZURLFilter
      */
     function createSqlParts( $params )
     {
-        include_once( 'lib/ezdb/classes/ezdb.php' );
-        $db =& eZDB::instance();
+        $db = eZDB::instance();
 
         //eZDebug::writeDebug( $params, 'eZURLFilter::createSqlParts' );
 
